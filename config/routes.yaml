@@ -1,0 +1,6 @@
+#index:
+#    path: /
+#    controller: App\Controller\Api\WeatherRankController::rankAction
+#    methods: ['GET']
+#    defaults:
+#      _format: json
