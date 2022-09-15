@@ -19,10 +19,6 @@ class WeatherRankController extends AbstractFOSRestController
     protected $minCities = 2;
     protected $maxCities = 4;
 
-    protected $apiKeys = [
-        'test',
-    ];
-
     protected $rankService;
 
     /**
@@ -43,13 +39,8 @@ class WeatherRankController extends AbstractFOSRestController
      */
     public function index(Request $request): Response
     {
-        $key = $request->query->get('key');
-        // unauthorized
-        if ($key === null || !in_array($key, $this->apiKeys, true)) {
-            throw new HttpException(401, 'Invalid API key.');
-        }
-
         $cities = $request->query->get('cities');
+
         // example match: Warsaw,San Francisco,Berlin
         preg_match_all("/\p{L}+(?=[,]*)[\s?\p{L}]+/u", $cities, $regexMatch);
         $citiesArray = $regexMatch[0];
